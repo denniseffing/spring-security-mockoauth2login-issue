@@ -1,0 +1,18 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/route/",
+    "headers": {
+      "Authorization": {
+        "equalTo": "Bearer access-token"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "bodyFileName": "route.json"
+  }
+}

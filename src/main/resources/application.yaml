@@ -1,0 +1,27 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: some-route
+          uri: ${gateway.target.uri.some-route}
+          predicates:
+            - Path=/route/**
+          filters:
+            - TokenRelay
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            authorization-uri: http://localhost:8080/auth/realms/gateway/protocol/openid-connect/auth
+            token-uri: http://localhost:8080/auth/realms/gateway/protocol/openid-connect/token
+            user-info-uri: http://localhost:8080/auth/realms/gateway/protocol/openid-connect/userinfo
+            user-name-attribute: sub
+            jwk-set-uri: http://localhost:8080/auth/realms/gateway/protocol/openid-connect/certs
+        registration:
+          keycloak:
+            client-id: gateway
+            client-secret: 357638792F423F4528472B4B6250655368566D597133743677397A2443264629
+            authorization-grant-type: authorization_code
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            scope: openid
